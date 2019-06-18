@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import TodoList from './Components/TodoList'
-import {addItem} from './Actions/index'
+import {addItem, filterCompleted, showAll, deleteCompleted, fromLocalStorage} from './Actions/index'
 
 import './App.css';
 
@@ -21,6 +21,22 @@ class App extends Component {
         this.setState({inputItem: e.target.value})
     }
 
+    filterCompleted = (e) => {
+        e.preventDefault();
+        this.props.filterCompleted()
+    }
+
+    showAll = (e) => {
+        e.preventDefault();
+        this.props.showAll()
+    }
+
+    componentDidMount() {
+        let todoFromStorage = JSON.parse(localStorage.getItem("todo"))
+        if(todoFromStorage !== null)
+            this.props.fromLocalStorage(todoFromStorage);
+    }
+    
     render(){
         return(
             <div className = "App">
@@ -37,7 +53,9 @@ class App extends Component {
                         type="Submit"
                     />
                 </form>
-                
+                <button onClick = {this.filterCompleted}>Show Uncompleted</button>
+                <button onClick = {this.showAll}>Show All</button>
+                <button onClick = {this.props.deleteCompleted}>Delete Completed</button>
             </div>
         )
     }
@@ -45,7 +63,11 @@ class App extends Component {
 }
 
 const mapDispatchToProps = {
-    addItem
+    addItem,
+    filterCompleted,
+    showAll,
+    deleteCompleted,
+    fromLocalStorage
 }
 
 export default connect(null, mapDispatchToProps)(App)

@@ -7,8 +7,12 @@ import Todo from './Todo'
 function TodoList(props) {
     return (
         <ul>
-            {props.todoList.map(item => {
-                return <Todo key={item.id} item = {item} completeItem = {props.completeItem} />
+            {props.displayed.map(item => {
+                return <Todo 
+                    key={item.id} 
+                    item = {item} 
+                    completeItem = {props.completeItem} 
+                />
             })}
         </ul>
     )
@@ -16,7 +20,7 @@ function TodoList(props) {
 }
 
 const mapStateToProps = (state) => ({
-    todoList: state.todoList
+    displayed: state.displayed
 })
 
 
