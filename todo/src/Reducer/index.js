@@ -1,6 +1,6 @@
 import {COMPLETED_ITEM, ADD_TODO, DELETE_COMPLETED, SHOW_ALL, FILTER_COMPLETED, GET_LOCAL_STORAGE} from '../Actions/index.js'
 
-let id = 0;
+
 
 const initialState = {
     todoList: [],
@@ -10,7 +10,7 @@ const initialState = {
 const reducer = (state=initialState, action) => {
     switch(action.type){
         case ADD_TODO:
-            let addedItem = [...state.todoList, {value: action.item, completed: false, id: id++}]
+            let addedItem = [...state.todoList, {value: action.item, completed: false, id: Date.now()}]
             localStorage.setItem("todo", JSON.stringify(addedItem));
             return {todoList: addedItem, displayed: addedItem}
         case COMPLETED_ITEM:

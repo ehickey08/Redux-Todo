@@ -49,6 +49,7 @@ class App extends Component {
                         value={this.state.inputItem}
                     />
                     <input
+                        className = "submitButton"
                         name="submit"
                         type="Submit"
                     />

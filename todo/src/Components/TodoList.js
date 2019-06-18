@@ -6,7 +6,7 @@ import Todo from './Todo'
 
 function TodoList(props) {
     return (
-        <ul>
+        <ul className = "todoList">
             {props.displayed.map(item => {
                 return <Todo 
                     key={item.id} 
